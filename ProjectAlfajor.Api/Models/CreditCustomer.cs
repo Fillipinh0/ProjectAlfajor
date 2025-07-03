@@ -17,7 +17,8 @@ namespace ProjectAlfajor.Api.Models
         [Required(ErrorMessage = "Sale Date is required.")]
         public DateTime SaleDate { get; set; }
 
-        [Required(ErrorMessage = "Payment status is required.")]
+        //Isso nao sera informado no front pois ele ja gera false.
+        //E ce estou registrando um devedor é exatamente por que ele n pagou
         public bool IsPaid { get; set; }            // Pago (true = sim, false = não)
     }
 }

@@ -39,7 +39,7 @@ namespace ProjectAlfajor.Api.Migrations
 
                     b.HasKey("CreditCustomerId");
 
-                    b.ToTable("CreditCustomers");
+                    b.ToTable("CreditCustomers", (string)null);
                 });
 
             modelBuilder.Entity("ProjectAlfajor.Api.Models.DailySale", b =>
@@ -62,7 +62,7 @@ namespace ProjectAlfajor.Api.Migrations
 
                     b.HasKey("DailySaleId");
 
-                    b.ToTable("DailySales");
+                    b.ToTable("DailySales", (string)null);
                 });
 
             modelBuilder.Entity("ProjectAlfajor.Api.Models.Product", b =>
@@ -84,7 +84,7 @@ namespace ProjectAlfajor.Api.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 #pragma warning restore 612, 618
         }
