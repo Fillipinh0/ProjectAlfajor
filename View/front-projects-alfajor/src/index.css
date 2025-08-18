@@ -1,0 +1,39 @@
+:root {
+  --rosa-claro: #FFF5F7;
+  --marrom-chocolate: #6F4E37;
+  --cinza-escuro: #4a4a4a;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.produtos-bg {
+  background-color: var(--rosa-claro); /* rosa bem clarinho */
+}
+
+.text-marrom {
+  color: var(--marrom-chocolate); /* marrom chocolate */
+}
+
+thead tr {
+  color: var(--marrom-chocolate); /* marrom chocolate */
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 16px; 
+  border-bottom: 3px solid var(--marrom-chocolate); /* linha separadora marrom */
+}
+
+.table td {
+  color: var(--cinza-escuro);
+}

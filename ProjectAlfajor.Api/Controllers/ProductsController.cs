@@ -52,7 +52,7 @@ namespace ProjectAlfajor.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostProduct([FromBody] Product product)
         {
-            if (product is null) return BadRequest("Invalid product data.");
+            if (product is null) return BadRequest($"Invalid product data. {product}");
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();

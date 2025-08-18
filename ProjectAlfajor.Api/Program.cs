@@ -12,6 +12,17 @@ builder.Services.AddSwaggerGen();
 //Configura o EF com SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data source=projectalfajor.db"));
+//Config para consumir a App no local
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 
 
 var app = builder.Build();
@@ -26,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowReactApp");
 
 app.UseHttpsRedirection();
 
