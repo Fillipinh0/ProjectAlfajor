@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectAlfajor.Api.Data;
+using ProjectAlfajor.Api.DTOs;
 using ProjectAlfajor.Api.Models;
 
 namespace ProjectAlfajor.Api.Controllers
@@ -64,15 +65,17 @@ namespace ProjectAlfajor.Api.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> PutProduct(int id, [FromBody] Product updatedData)
+        public async Task<IActionResult> PutProduct(int id, [FromBody] ProductCreateDTO updatedData)
         {
             var product = await _context.Products.FindAsync(id);
 
             if (product is null) return NotFound($"Product id:{id} not found.");
 
             product.Name = updatedData.Name;
-            product.PurchasePrice = updatedData.PurchasePrice;
+            product.UnitPrice = updatedData.UnitPrice;
             product.PurchaseDate = updatedData.PurchaseDate.Date;
+            product.Quantity = updatedData.Quantity;
+            product.TotalPurchaseValue = updatedData.UnitPrice * updatedData.Quantity;
 
             await _context.SaveChangesAsync();
 
