@@ -51,9 +51,18 @@ namespace ProjectAlfajor.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        public async Task<IActionResult> PostProduct([FromBody] ProductCreateDTO productDTO)
         {
-            if (product is null) return BadRequest($"Invalid product data. {product}");
+            if (productDTO is null) return BadRequest($"Invalid product data. {productDTO}");
+
+            var product = new Product
+            {
+                Name = productDTO.Name,
+                UnitPrice = productDTO.UnitPrice,
+                PurchaseDate = productDTO.PurchaseDate.Date,
+                Quantity = productDTO.Quantity,
+                TotalPurchaseValue = productDTO.UnitPrice * productDTO.Quantity
+            };
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();

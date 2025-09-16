@@ -34,6 +34,19 @@ thead tr {
   border-bottom: 3px solid var(--marrom-chocolate); /* linha separadora marrom */
 }
 
+
 .table td {
   color: var(--cinza-escuro);
+  justify-content: center;
+  align-items: center;
+}
+
+.register {
+  background-color: hsla(313, 30%, 53%, 0.151);;
+
+}
+.table .td_center {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

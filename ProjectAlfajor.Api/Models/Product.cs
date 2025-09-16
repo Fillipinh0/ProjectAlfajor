@@ -5,7 +5,7 @@ namespace ProjectAlfajor.Api.Models
     public class Product
     {
         [Key]                              
-        public int ProductId { get; set; }  
+        public int? ProductId { get; set; }  
 
         [Required(ErrorMessage = "Name is required.")]               
         [MaxLength(100)]

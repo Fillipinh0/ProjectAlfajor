@@ -26,9 +26,9 @@ function ProductsPage() {
 
   async function cadastroProduto() {
     const nameProduct = document.getElementById('nome').value;
-    const precoProduct = document.getElementById('preco').value;
-    const dataProduct = document.getElementById('data').value;
-    const btnProduct = document.getElementById('btnProd');
+    const priceProduct = document.getElementById('preco').value;
+    const dateProduct = document.getElementById('data').value;
+    const quantity = document.getElementById('quantity').value;
     
     try {
 
@@ -38,10 +38,10 @@ function ProductsPage() {
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "productId": 0,
           "name": nameProduct,
-          "purchasePrice": parseFloat(precoProduct),
-          "purchaseDate": new Date(dataProduct).toISOString()
+          "unitPrice": parseFloat(priceProduct),
+          "purchaseDate": new Date(dateProduct).toISOString(),
+          "quantity" :  parseInt(quantity)
         })
       });
      
@@ -78,13 +78,14 @@ function ProductsPage() {
   return (
     <div className="container mt-5 produtos-bg p-4 rounded shadow">
       <h2 className="text-center text-marrom mb-4">Lista de Produtos</h2>
-
       <div className="table-responsive">
         <table className="table table-hover table-striped table-borderless table-sm">
           <thead className="">
             <tr>
               <th scope="col">Nome</th>
-              <th scope="col">Preço</th>
+              <th scope="col">Valor Unitario</th>
+              <th scope='col'>Quantidade</th>
+              <th scope='col'>Total</th>
               <th scope="col">Data da Compra</th>
             </tr>
           </thead>
@@ -92,21 +93,24 @@ function ProductsPage() {
             {products.map((prod, index) => (
               <tr key={index}>
                 <td>{prod.name}</td>
-                <td>R$ {parseFloat(prod.purchasePrice).toFixed(2)}</td>
-                <td>{new Date(prod.purchaseDate).toLocaleDateString('pt-BR')}</td>
-                <td>
+                <td>R$ {parseFloat(prod.unitPrice).toFixed(2)}</td>
+                <td >{prod.quantity}</td>
+                <td>R$ {parseFloat(prod.totalPurchaseValue).toFixed(2)}</td>
+                <td className='td_center'>
+                  {new Date(prod.purchaseDate).toLocaleDateString('pt-BR')}
                   <button type="button" class="btn btn-outline-danger" onClick={() => deleteProduct(prod.productId)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                       <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                     </svg>
                   </button>
                 </td>
+                
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-       <div className="mt-5 p-4 rounded produtos-bg shadow">
+       <div className="mt-5 p-4 rounded produtos-bg shadow register">
         <h3 className="text-marrom">Cadastro dos Produtos Comprados</h3>
 
         <input
@@ -126,11 +130,16 @@ function ProductsPage() {
           id='data'
           className="form-control mb-3"
         />
+        <input 
+          type="number"
+          id='quantity'
+          className="form-control mb-3"
+          placeholder="Quantidade"
+        />
         <button onClick={cadastroProduto} className="btn btn-outline-dark">
           Cadastrar
         </button>
       </div>
-      
       
     </div>
   );
